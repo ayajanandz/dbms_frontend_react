@@ -4,23 +4,24 @@ import "./Dashboard.css";
 import Popup from "../Popup/Popup";
 import Newuser from "../NewUser/NewUser";
 import { Button } from "@mui/material";
-// import BasicTable from "./table";
+
 
 import { useNavigate } from "react-router-dom";
 
 const Dashboard=() => {
     const navigate = useNavigate();
     const user = localStorage.getItem("username");
+    const login = localStorage.getItem("login");
     const subj = localStorage.getItem("subject");
     const [openPopup, setOpenPopup] = useState(false);
     const logoutFnc = () => {
-        localStorage.setItem("UserName", null);
-        localStorage.setItem("login", null);
-        localStorage.setItem("Email", null);
-        localStorage.setItem("subject", null);
+        localStorage.removeItem("username");
+        localStorage.removeItem("login");
+        localStorage.removeItem("Email");
+        localStorage.removeItem("subject");
         navigate("/");
       };
-
+  if(login === "true") {
     return (
         <>
             <div className="home-page">
@@ -54,6 +55,13 @@ const Dashboard=() => {
         </Popup>
         </>
     )
+  } else {
+    return(
+      <div>
+        You are logged out !
+      </div>
+    )
+  }
 
 }
 

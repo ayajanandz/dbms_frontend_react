@@ -1,84 +1,65 @@
-// Import necessary dependencies and components
-import React, { useState, useEffect } from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import axios from 'axios';
-import CircularProgress from '@mui/material/CircularProgress';
+
+import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 
 // Login component
 const Login = () => {
   // State for email and password
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const[loading, setLoading]=useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [valid, isValid] = useState("false");
 
   // Function to handle form submission
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     console.log("sent request");
     e.preventDefault();
     setLoading(true);
-    // // TODO: Implement your login logic here
+    
 
     try {
-        const user = {
-            email,
-            password
-        }
-        
-    
-    const response = await axios.post("http://localhost:5211/login", user);
+      const user = {
+        email,
+        password,
+      };
 
-    if(response.data){
+      const response = await axios.post("http://localhost:5211/login", user);
 
-    console.log(response.data);
-      
-    localStorage.setItem("subject", response.data.user.subjCode)
-    localStorage.setItem("username", response.data.user.name)
-    localStorage.setItem("login", true)
-    setLoading(false)
-    isValid("true");
-    navigate("/dashboard");
-    } else {
-      alert(response.data.message)
+      if (response.data) {
+        console.log(response.data);
+
+        localStorage.setItem("subject", response.data.user.subjCode);
+        localStorage.setItem("username", response.data.user.name);
+        localStorage.setItem("login", true);
+        setLoading(false);
+        isValid("true");
+        navigate("/dashboard");
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error.message);
+      alert(error.message);
     }
-
-    }catch(error){
-      setLoading(false)
-        console.log(error.message);
-        alert(error.message)
-
-    }
-
-    
-    
   };
-  // let login = "";
-  //   useEffect(() => {
-  //     login = localStorage.getItem("login");
-  
-  //     if (login === "true") {
-  //       navigate("/dashboard");
-  //     } else {
-  //       console.log("Unsec");
-  //       // alert(response.data)
-  //     }
-  //   }, [valid]);
 
   return (
-    <Container component="main" maxWidth="xs" >
+    <Container component="main" maxWidth="xs">
       <Box
         sx={{
           marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
         <Typography component="h1" variant="h5">
@@ -111,13 +92,12 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {/* Submit button */}
+
           <Button
             type="submit"
             fullWidth
-            // align="center"
             variant="contained"
-            disabled ={loading}
+            disabled={loading}
             sx={{ mt: 3, mb: 2 }}
           >
             Sign In
@@ -126,17 +106,14 @@ const Login = () => {
           <br></br>
 
           <Button
-            // type="submit"
             fullWidth
             variant="contained"
-            
             onClick={() => {
-                setEmail("guest@example.com");
-                setPassword("123456");
+              setEmail("guest@example.com");
+              setPassword("123456");
             }}
           >
             Get Dummy Credentials
-            
           </Button>
         </Box>
       </Box>

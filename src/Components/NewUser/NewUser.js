@@ -32,7 +32,8 @@ function RegistrationForm() {
         .then((res) => {
           alert(res.data.message);
         });
-      alert("Registered Successfully");
+        
+    
     } else {
       alert("invalid input");
     }
@@ -44,16 +45,7 @@ function RegistrationForm() {
     <div className="registration-form">
       <h2>Editing Details Form</h2>
       <form onSubmit={handleSubmit}>
-        {/* <div className="form-group">
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div> */}
+
         <div className="form-group">
           <label>USN</label>
           <input

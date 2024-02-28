@@ -1,10 +1,9 @@
 import * as React from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
-// import TabContext from '@mui/lab/TabContext';
+
 import Box from '@mui/material/Box';
 import Login from './Login';
 import Signup from './Signup'
-// import Tab from '@mui/material/Tab';
+
 import { Tab } from '@mui/material';
 import { TabContext } from '@mui/lab';
 import TabList from '@mui/lab/TabList';
